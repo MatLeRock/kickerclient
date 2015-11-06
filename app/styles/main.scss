@@ -1,0 +1,103 @@
+$icon-font-path: "../bower_components/bootstrap-sass/assets/fonts/bootstrap/";
+
+// bower:scss
+@import "bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+// endbower
+
+body {
+    padding: 0;
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+    h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 40px;
+        padding-bottom: 19px;
+    }
+}
+
+.footer {
+    padding-top: 19px;
+    color: #777;
+    border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+    margin: 30px 0;
+}
+
+/**********************/
+
+.pager-input{
+    width: 50px;
+    text-align:center; 
+}
+
+.user-row{
+    height: 70px;
+    border-bottom: 1px solid gray;
+    background-color: #F9F5F5;
+}
+
+.user-row>div{
+    padding: 5px;
+    text-align:center;
+}
+
+.userlist-header{
+    text-align: center;
+    height: 40px;
+    background-color: silver;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-top: 1px solid gray;
+    line-height: 40px;
+}
+
+.userlist{
+    height: 282px; 
+    overflow-y: auto;
+    border: 1px solid gray;
+}
+
+.userlist:last-child.user-row{
+    border-bottom: 0px;
+}
+
+.new_btn{
+    float: right;
+}
+
+.user_search_input{
+    float: left;
+}
+
+.user-cell{
+    max-width:0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /*display:block;*/
+    white-space: nowrap;
+}
+
+/*.member-cell{
+
+    @media (max-width: 768px) { 
+        font-size: 8px;
+    }
+
+}*/

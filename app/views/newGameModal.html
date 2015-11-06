@@ -1,0 +1,96 @@
+<div id="myModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" > 
+            <div class="modal-header" style="background-color: white;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Game</h4>
+            </div>
+            <div class="modal-body"  style="background-color: white;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <form novalidate ng-model="game" class="simple-form">
+                            <div class="col-xs-12 col-sm-12 col-md-12 ">
+                                <div class="col-xs-5 col-sm-5 col-md-5 text-right">
+                                    <p><b>Team 1</b></p>                 
+                                    <div ng-repeat="member in team1.getTeam() track by $index">
+                                        <div>{{member.firstname}}  </div> 
+                                        <div class="btn-xs btn-default btn" style="border-radius: 12px; margin-top: -12px;margin-right: -12px;" ng-click="team1.removeMember($index);">X</div>
+                                    </div> 
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 text-center">
+                                    <p><b>VS</b></p>
+                                </div>
+                                <div class="col-xs-5 col-sm-5 col-md-5 text-left">
+                                    <p><b>Team 2</b></p> 
+                                    <div ng-repeat="member in team2.getTeam() track by $index">
+                                        <div>{{member.firstname}}  </div> 
+                                        <div class="btn-xs btn-default btn" style="border-radius: 12px; margin-top: -12px;margin-left: -12px;" ng-click="team2.removeMember($index);">X</div>
+                                    </div> 
+                                </div>
+                                <div ng-hide="team1.getTeam().length > 0 || team2.getTeam().length > 0" class="col-xs-12 col-sm-12 col-md-12 text-center alert-info">[Please Add Player(s) for both Teams]</div>
+                                <div ng-show="team1.getTeam().length > 0 && !(team2.getTeam().length > 0)" class="col-xs-12 col-sm-12 col-md-12 text-center alert-info">[You still have to add Player(s) for Team 2]</div>
+                                <div ng-show="team2.getTeam().length > 0 && !(team1.getTeam().length > 0)" class="col-xs-12 col-sm-12 col-md-12 text-center alert-info">[You still have to add Player(s) for Team 1]</div>
+
+
+                                <!--<div ng-hide="team1.getTeam().length || team2.getTeam().length" class="col-xs-12 col-sm-12 col-md-12 text-center">[Please Add Players]</div>-->
+                                <!--<div ng-show="(!(team1.getTeam().length > 0) || !(team2.getTeam().length > 0)) && !(!(team1.getTeam().length > 0) && !(team2.getTeam().length > 0))" class="col-xs-12 col-sm-12 col-md-12 text-center">[2Please Add Players]</div>-->
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12">
+                                <div class="col-xs-12 col-sm-12 col-md-12  text-center" style="margin-bottom: 20px;margin-top: 30px;">
+                                    <i><b>- Result -</b></i> 
+                                </div>
+<!--
+                                <div class="col-xs-5 col-sm-5 col-md-5 text-right">
+                                    <input size="2" ype="text" ng-model="game.team1_result" />
+                                </div>
+                                <div class="col-xs-2 col-sm-2 col-md-2 text-center">
+                                    <p>:</p>
+                                </div>
+                                <div class="col-xs-5 col-sm-5 col-md-5 text-left">
+                                    <input size="2" type="text" ng-model="game.team2_result" />
+                                </div>-->
+                                <div class="col-xs-12 col-sm-12 col-md-12 text-center" style="margin-bottom: 20px;">
+                                    <input style="width:40px;" min="0" max="10" type="number" ng-model="game.team1_result" />
+                                    <span>:</span>
+                                    <input style="width:40px;" min="0" max="10" type="number" ng-model="game.team2_result" />
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+                                <p>
+                                    <button ng-disabled="(newUserForm.$invalid || !gameIsValid())" class="btn btn-primary" ng-hide="gameService.getGame()" type="submit" ng-click="saveGame(game)">Save</button>
+                                    <button ng-disabled="(newUserForm.$invalid || !gameIsValid())" class="btn btn-primary" ng-show="gameService.getGame()" type="submit" ng-click="saveGame(game)">Update</button>
+                                    <button class="btn btn-primary" ng-show="gameService.getGame()" type="submit" ng-click="deleteGame()">Delete</button>
+                                </p>
+                                <p ng-show="message">{{message}}</p>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <div class="userlist-header">
+                            <b>Available Players</b> 
+                        </div>
+                        <div ng-show="loading"><loading></loading></div>
+                        <div class="userlist">
+                            <div class="user-row" ng-repeat="user in filterUsers(usersService.getUsers())" >
+                                <div>{{user.displayName}}</div>
+                                <div>
+                                    <a href class="btn-xs btn-default btn" ng-click="team1.addMember(user, $event);">+ Team 1</a>
+                                    <a href class="btn-xs btn-default btn" ng-click="team2.addMember(user, $event);">+ Team 2</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer" style="background-color: white;">
+                
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

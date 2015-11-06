@@ -1,0 +1,60 @@
+<div id="loginModal" class="modal fade" role="dialog" >
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" > 
+            <div class="modal-header" style="background-color: white;">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">New Game</h4>
+            </div>
+            <div class="modal-body"  style="background-color: white;">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-6">
+                        <form name="CredentialsForm" role="form" novalidate class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputName" class="control-label col-xs-2">Name</label>
+                                <div class="col-xs-10">
+                                    <!--<input type="email" class="form-control" id="inputEmail" >-->
+                                    <input name="cName" ng-maxlength="15" id="inputName" type="text" class="form-control" placeholder="Name" ng-model="credentials.name" required/>
+                                </div>
+                                <div class="col-xs-offset-2 col-xs-10" role="alert">
+                                    <span ng-show="CredentialsForm.cName.$error.required">
+                                        Please enter Name.
+                                    </span>
+                                    <span ng-show="CredentialsForm.cName.$error.maxlength">
+                                        Name is too long (max. 15 Characters).
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="control-label col-xs-2">Password</label>
+                                <div class="col-xs-10">
+                                    <input name="cPassword" ng-maxlength="15" type="password" class="form-control" id="inputPassword" placeholder="Password" ng-model="credentials.password" required>
+                                </div>
+                                <div class="col-xs-offset-2 col-xs-10" role="alert">
+                                    <span ng-show="CredentialsForm.cPassword.$error.required">
+                                        Please enter Password.
+                                    </span>
+                                    <span ng-show="CredentialsForm.cPassword.$error.maxlength">
+                                        Password is too long (max. 15 Characters).
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-offset-2 col-xs-10">
+                                    <button type="submit" ng-disabled="CredentialsForm.$invalid" class="btn btn-primary" ng-click="login()">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer" style="background-color: white;">
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>

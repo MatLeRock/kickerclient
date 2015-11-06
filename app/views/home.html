@@ -1,0 +1,87 @@
+<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <table class="table" ng-controller="TeamTableCtrl">
+            <thead>  
+                <tr> 
+                    <th style="width:60%">Team</th>
+                    <th style="width:10%">Wins</th>
+                    <th style="width:10%">Lost</th> 
+                    <th style="width:20%">Points</th>  
+                </tr>
+            </thead>
+            <tr ng-show="loading"><td colspan="3"><loading></loading><td>
+            <tr ng-repeat="team in teamsTable" on-finish-render="ngRepeatFinished">
+                <td>
+                    <span class="name" title="{{name.firstname}} {{name.lastname}}" ng-repeat="name in team.team">
+                       {{name.nickname}}
+                        <span id='memberPopover' style='display: none;'>
+                            <img ng-if="(name.avatar != null && name.avatar != '')" ng-src='{{name.avatar}}'/>
+                            <img ng-if="(name.avatar == null || name.avatar == '')" src='images/yeoman.png'/>
+                        </span>
+                    </span>
+                </td>
+                <td>{{team.won}}</td>
+                <td>{{team.lost}}</td>   
+                <td>{{team.points}}</td> 
+            </tr>
+        </table>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <table class="table" ng-controller="UserTableCtrl">
+            <thead>  
+                <tr>
+                    <th style="width:30%">User</th>
+                    <th style="width:20%">Wins</th>
+                    <th style="width:20%">Lost</th>
+                    <th style="width:30%">Points</th>
+                </tr>
+            </thead>
+            <tr ng-show="loading"><td colspan="4"><loading></loading><td>
+            <tr ng-repeat="user in usersTable" on-finish-render="ngRepeatFinished">
+                <td>
+                    <span class="name" title="{{user.firstname}} {{user.lastname}}" >
+                        {{user.nickname}}
+                    </span>
+                </td>
+                <td>{{user.won}}</td>
+                <td>{{user.lost}}</td>
+                <td>{{user.points}}</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div ng-controller="GamesCtrl" class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div  class="col-xs-12 col-sm-12 col-md-12">
+        <table class="table" >
+            <thead>  
+                <tr>
+                    <th style="width:20%">Date</th>
+                    <th style="width:30%">Team 1 </th>
+                    <th style="width:10%">Result</th>
+                    <th style="width:30%">Team 2 </th>
+                </tr>
+            </thead>
+            <tr ng-show="loading">
+                <td colspan="4"><loading></loading><td>
+                </tr>
+            <tr ng-hide="games.length || loading">
+                <td colspan="4">No content<td>
+            </tr>
+            <tr ng-show="games.length" ng-repeat="game in games">        
+                <td>{{(game.created * 1000) | date:'dd.MM.yyyy'}}</td>
+                <td>
+                    <span ng-repeat="member in game.team1">
+                        {{member.nickname}}
+                    </span>
+                </td>
+                <td>{{game.team1_result}} : {{game.team2_result}}</td>
+                <td> 
+                    <span ng-repeat="member in game.team2">
+                        {{filterMember(member)}}
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

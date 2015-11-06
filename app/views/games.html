@@ -1,0 +1,61 @@
+<div ng-controller="GamesCtrl" class="col-xs-12 col-sm-12 col-md-12">
+    <div class="row">
+        <div class="col-xs-12">
+            <span class="new_btn">
+            <button type="button" class="btn btn-info btn-sm" ng-click="openModal()">New Game</button>
+            </span>
+        </div>
+    </div>
+    <table class="table" >
+        <thead>  
+            <tr>
+                <th style="width:20%">Date</th>
+                <th style="width:30%">Team 1 </th>
+                <th style="width:10%">Result</th>
+                <th style="width:30%">Team 2 </th>
+                <th style="width:10%"></th>
+            </tr>
+        </thead>
+        <tr ng-show="loading">
+            <td colspan="4"><loading></loading><td>
+            </tr>
+        <tr ng-hide="games.length || loading">
+            <td colspan="4">No content<td>
+            </tr>
+        <tr ng-show="games.length" ng-repeat="game in games">        
+            <td>{{(game.created * 1000) | date:'dd.MM.yyyy'}}</td>
+            <td>
+                <span class="member-cell" ng-repeat="member in game.team1">
+                    {{filterMember(member)}}
+                </span>
+            </td>
+            <td>{{game.team1_result}} : {{game.team2_result}}</td>
+            <td> 
+                <span class="member-cell" ng-repeat="member in game.team2">
+                    {{filterMember(member)}}
+                </span>
+            </td>
+            <td>
+                <button href class="btn btn-default btn-sm" ng-click="editGame(game.id)">Edit</button>
+            </td>
+        </tr>
+    </table>  
+    <div class="col-xs-12">
+        <label>Items/page: <input ng-change="doPaging(1, pagerSizeInput)" class="pager-input" type="text" ng-model="pagerSizeInput"/></label>
+    </div>
+    <div class="col-xs-12">
+        Total Items: {{games.total}}
+    </div>
+    <div class="col-xs-12">
+        <paging
+            ng-show="games.length"
+            page="page" 
+            page-size="pageSize" 
+            total="total"
+            paging-action="doPaging(page, pageSize)">
+        </paging>
+    </div>
+</div>
+
+
+
