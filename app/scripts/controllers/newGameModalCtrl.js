@@ -150,7 +150,7 @@ angular.module('kickerleagueClientApp')
                                     $scope.team1.reset();
                                     $scope.team2.reset();
 
-                                })
+                                });
                                 // throwing the 401/Unauthorized error
                                 result.error(function(data, status, headers) {
                                     if (status === 401) {
